@@ -1,4 +1,4 @@
-package com.example.demo.menu.VO;
+package com.example.demo.menu.vo;
 
 import lombok.Data;
 
