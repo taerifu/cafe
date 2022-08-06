@@ -5,13 +5,27 @@
 
 <mapper namespace="com.example.demo.menu.mapper.MenufanMapper">
 	
-	<select id="selectMenuAll" resultType="map">
-		SELECT MENU_NM  
-		FROM TB_MENU_INFO
+	<!--  hashmap으로 반환(결과가 hashmap 0 묶음 이상)  -->
+	<select id="selectMenuByList" resultType="hashmap"> 
+		SELECT * FROM TB_MENU_INFO 
+	</select>
+
+	<!--  hashmap으로 반환(결과가 hashmap 1묶음 이하)  -->
+	<select id="selectMenuByMap" resultType="hashmap" parameterType="int"> 
+		SELECT * FROM TB_MENU_INFO WHERE MENU_ID = #{menuId} 
+	</select>
+
+	<!--  내가 만든 hashmap으로 반환(결과가 hashmap 1묶음 이하)  -->
+	<!--  application.properties에서 설정한 camelcase가 적용된다.  -->
+	<select id="selectMenuByCustomMap" resultType="com.example.demo.menu.vo.CustomMap" parameterType="int"> 
+		SELECT * FROM TB_MENU_INFO WHERE MENU_ID = #{menuId} 
+	</select>
+
+	<!--  리턴타입을 생성해둔 vo 객체로 돌려주기(결과가 vo 객체 1묶음)  -->
+	<!--  bean객체이기때문에 application.properties에 설정한 camelcase가 resultmap 설정없이도 적용된다.  -->
+	<!--  application.properties에 vo 객체 alias지정을 해주었기 때문에  resultType에 클래스명만 써도 됨  -->
+	<select id="selectMenuVo" resultType="MenuVo" parameterType="int"> 
+		SELECT * FROM TB_MENU_INFO WHERE MENU_ID = #{menuId}
 	</select>
 	
-	
-	
-	
-
 </mapper>
